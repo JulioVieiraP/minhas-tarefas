@@ -11,6 +11,7 @@ type Props = {
 
 const Tarefa = ({ titulo, prioridade, status, descricao }: Props) => {
   const [estaEditando, setEstaEditando] = useState(false)
+
   return (
     <S.Card>
       <S.Titulo>{titulo}</S.Titulo>
