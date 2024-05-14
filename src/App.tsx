@@ -1,7 +1,15 @@
+import ListaDeTarefas from './containers/ListaDeTarefas'
+import Sidebar from './containers/Sidebar'
+import EstiloGlobal, { Container } from './styles'
+
 function App() {
   return (
     <>
-      <h1>Ola mundo</h1>
+      <EstiloGlobal />
+      <Container>
+        <Sidebar />
+        <ListaDeTarefas />
+      </Container>
     </>
   )
 }
