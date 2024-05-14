@@ -1,19 +1,21 @@
+// ListaDeTarefas.tsx
 import Tarefa from '../../components/Tarefa'
 import * as S from './styles'
+import * as enums from '../../utils/enums/Tarefa'
 
 const ListaDeTarefas = () => {
   const tarefas = [
     {
-      titulo: 'estudar typeScript',
-      descricao: 'ver a aula 3 da ebac',
-      prioridade: 'urgente',
-      status: 'pendente'
+      titulo: 'Estudar TypeScript',
+      descricao: 'Ver a aula 3 da EBAC',
+      prioridade: enums.Prioridade.URGENTE,
+      status: enums.Status.PENDENTE
     },
     {
       titulo: 'Pagar a conta de internet',
       descricao: 'Baixar fatura do Gmail',
-      prioridade: 'urgente',
-      status: 'concluida'
+      prioridade: enums.Prioridade.IMPORTANTE,
+      status: enums.Status.CONCLUIDA
     }
   ]
 
