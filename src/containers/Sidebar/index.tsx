@@ -1,20 +1,55 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../redux/store'
+
 import FiltroCard from '../../components/FiltroCard'
 import * as S from './styles'
+import * as enums from '../../utils/enums/Tarefa'
 
-const Sidebar = () => (
-  <S.Aside>
-    <div>
-      <S.Campo type="text" placeholder="Buscar" />
-      <S.Filtros>
-        <FiltroCard contador={3} legenda="pendentes" />
-        <FiltroCard contador={3} legenda="concluídas" />
-        <FiltroCard contador={3} legenda="urgentes" />
-        <FiltroCard contador={3} legenda="importantes" />
-        <FiltroCard contador={3} legenda="normal" />
-        <FiltroCard ativo contador={3} legenda="todas" />
-      </S.Filtros>
-    </div>
-  </S.Aside>
-)
+import { alteraTermo } from '../../redux/reducers/filtro'
+
+const Sidebar = () => {
+  const dispatch = useDispatch()
+  const { termo } = useSelector((state: RootReducer) => state.filtros)
+  return (
+    <S.Aside>
+      <div>
+        <S.Campo
+          type="text"
+          placeholder="Buscar"
+          value={termo}
+          onChange={(e) => dispatch(alteraTermo(e.target.value))}
+        />
+        <S.Filtros>
+          <FiltroCard
+            valor={enums.Status.PENDENTE}
+            criterio="status"
+            legenda="pendentes"
+          />
+          <FiltroCard
+            valor={enums.Status.CONCLUIDA}
+            criterio="status"
+            legenda="concluídas"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.URGENTE}
+            criterio="prioridade"
+            legenda="urgentes"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.IMPORTANTE}
+            criterio="prioridade"
+            legenda="importantes"
+          />
+          <FiltroCard
+            valor={enums.Prioridade.NORMAL}
+            criterio="prioridade"
+            legenda="normal"
+          />
+          <FiltroCard criterio="todas" legenda="todas" />
+        </S.Filtros>
+      </div>
+    </S.Aside>
+  )
+}
 
 export default Sidebar
