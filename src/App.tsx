@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import EstiloGlobal, { Container } from './styles'
 import Home from './Pages/Home'
 import RouterView from './Routes/RouteView'
+import Cadastro from './Pages/Cadastro'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <EstiloGlobal />
       <BrowserRouter>
         <Container>
-          <RouterView Home={<Home />} NovaTarefa={<h1>Ola mundo</h1>} />
+          <RouterView Home={<Home />} NovaTarefa={<Cadastro />} />
         </Container>
       </BrowserRouter>
     </>

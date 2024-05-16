@@ -75,10 +75,6 @@ export const Botao = styled.button`
   cursor: pointer;
 `
 
-export const BotaoSalvar = styled(Botao)`
-  background-color: ${Variaveis.verde};
-`
-
 export const BotaoRed = styled(Botao)`
   background-color: ${Variaveis.vermelho};
 `
