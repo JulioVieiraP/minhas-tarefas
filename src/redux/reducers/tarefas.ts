@@ -40,27 +40,46 @@ const tarefas = createSlice({
       state.itens = state.itens.filter((tarefa) => tarefa.id !== payload)
     },
     editar: (state, { payload }: PayloadAction<Tarefa>) => {
-      const tarefaParaEditar = state.itens.findIndex(
+      const indexDaTarefa = state.itens.findIndex(
         (item) => item.id === payload.id
       )
 
-      if (tarefaParaEditar >= 0) {
-        state.itens[tarefaParaEditar] = payload
+      if (indexDaTarefa >= 0) {
+        state.itens[indexDaTarefa] = payload
       }
     },
-    cadastrar: (state, { payload }: PayloadAction<Tarefa>) => {
+    cadastrar: (state, { payload }: PayloadAction<Omit<Tarefa, 'id'>>) => {
       const tarefaJaExiste = state.itens.find(
         (tarefa) => tarefa.titulo.toLowerCase() === payload.titulo.toLowerCase()
       )
       if (tarefaJaExiste) {
         alert('Já existe uma tarefa com esse nome')
       } else {
-        state.itens.push(payload)
+        const ultimaTarefa = state.itens[state.itens.length - 1]
+        const tarefaNova = {
+          ...payload,
+          id: ultimaTarefa ? ultimaTarefa.id + 1 : 1
+        }
+        state.itens.push(tarefaNova)
+      }
+    },
+    alteraStatus: (
+      state,
+      { payload }: PayloadAction<{ id: number; finalizado: boolean }>
+    ) => {
+      const indexDaTarefa = state.itens.findIndex(
+        (item) => item.id === payload.id
+      )
+
+      if (indexDaTarefa >= 0) {
+        state.itens[indexDaTarefa].status = payload.finalizado
+          ? enums.Status.CONCLUIDA
+          : enums.Status.PENDENTE
       }
     }
   }
 })
 
-export const { remover, editar, cadastrar } = tarefas.actions
+export const { remover, editar, cadastrar, alteraStatus } = tarefas.actions
 
 export default tarefas.reducer

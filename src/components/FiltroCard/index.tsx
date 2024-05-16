@@ -12,7 +12,7 @@ export type Props = {
 }
 
 const FiltroCard = ({ legenda, criterio, valor }: Props) => {
-  const dispath = useDispatch()
+  const dispatch = useDispatch()
   const { filtros, tarefas } = useSelector((state: RootReducer) => state)
 
   const verificaEstaAtivo = () => {
@@ -30,10 +30,11 @@ const FiltroCard = ({ legenda, criterio, valor }: Props) => {
     if (criterio === 'status') {
       return tarefas.itens.filter((item) => item.status === valor).length
     }
+    return 0
   }
 
   const filtrar = () => {
-    dispath(
+    dispatch(
       alteraTermoFiltro({
         criterio,
         valor
@@ -43,10 +44,11 @@ const FiltroCard = ({ legenda, criterio, valor }: Props) => {
 
   const contador = contarTarefas()
   const ativo = verificaEstaAtivo()
+
   return (
-    <S.Card ativo={ativo} onClick={filtrar}>
+    <S.Card ativo={ativo.toString()} onClick={filtrar}>
       <S.Contador>{contador}</S.Contador>
-      <S.label>{legenda}</S.label>
+      <S.Label>{legenda}</S.Label>
     </S.Card>
   )
 }

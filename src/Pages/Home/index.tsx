@@ -5,7 +5,7 @@ import Sidebar from '../../containers/Sidebar'
 const Home = () => {
   return (
     <>
-      <Sidebar />
+      <Sidebar MostrarFiltros />
       <ListaDeTarefas />
       <BotaoAdicionar />
     </>

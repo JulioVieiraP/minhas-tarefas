@@ -1,8 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import Tarefa from '../../models/Tarefa'
-
 import { cadastrar } from '../../redux/reducers/tarefas'
 
 import * as enums from '../../utils/enums/Tarefa'
@@ -22,14 +20,14 @@ const Formulario = () => {
   const CadastrarTarefa = (e: FormEvent) => {
     e.preventDefault()
 
-    const tarefaParaAdicionar = new Tarefa(
-      titulo,
-      prioridade,
-      enums.Status.PENDENTE,
-      descricao,
-      9
+    dispatch(
+      cadastrar({
+        titulo,
+        prioridade,
+        descricao,
+        status: enums.Status.PENDENTE
+      })
     )
-    dispatch(cadastrar(tarefaParaAdicionar))
     navigate('/')
   }
 
